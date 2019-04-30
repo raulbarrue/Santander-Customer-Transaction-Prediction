@@ -13,19 +13,20 @@ plot_results = False
 predict_kaggle = False
 save_model = False
 
-main_question = input("Personalise execution? Y/N")
+main_question = input("Personalise execution? Y/N -> ")
 if main_question == "Y".lower():
 
-    question1 = input("Plot results? Y/N")
+    question1 = input("Plot results? Y/N -> ")
     if question1 == "Y".lower():
         plot_results = True
 
-    question2 = input("Predict Kaggle test? Y/N")
+    question2 = input("Predict Kaggle test? Y/N -> ")
     if question2 == "Y".lower():
         predict_kaggle = True
 
-    question3 = input("Save model? Y/N")
+    question3 = input("Save model? Y/N -> ")
     if question3 == "Y".lower():
+        model_name = input("Input model name: ")
         save_model = True
 
 
@@ -98,11 +99,10 @@ if plot_results:
 
 # Predicting Kaggle
 if predict_kaggle:
-    test_dataset = pd.read_csv("data/test.csv")
-    test_id = test_dataset["ID_code"]
-    test_data = test_data.drop("ID_code", axis = 1)
+    load_df = pd.read_csv("data/test.csv")
+    test_data = load_df.drop("ID_code", axis = 1)
     predictions = model.predict_classes(test_data)
-    kaggle_results = pd.DataFrame(data = predictions, index = testdf["ID_code"], columns = ["ID_code", "target"])
-    kaggle_results.to_csv("/results/NN_submission.csv") 
+    kaggle_results = pd.DataFrame(data = predictions, index = load_df["ID_code"], columns = ["target"])
+    kaggle_results.to_csv("results/NN_submission.csv") 
 
 
