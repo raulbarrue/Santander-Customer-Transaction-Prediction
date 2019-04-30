@@ -102,3 +102,7 @@ if predict_kaggle:
     test_id = test_dataset["ID_code"]
     test_data = test_data.drop("ID_code", axis = 1)
     predictions = model.predict_classes(test_data)
+    kaggle_results = pd.DataFrame(data = predictions, index = testdf["ID_code"], columns = ["ID_code", "target"])
+    kaggle_results.to_csv("/results/NN_submission.csv") 
+
+
