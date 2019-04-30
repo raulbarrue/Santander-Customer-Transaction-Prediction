@@ -65,7 +65,7 @@ model.add(Dense(1, activation = "sigmoid", name = "dense4"))
 model.compile(optimizer = "adam", loss = "binary_crossentropy", metrics = ["accuracy"])
 
 # NN Fit
-history = model.fit(X_train, y_train, epochs = 20, validation_data = (X_test, y_test))
+history = model.fit(X_train, y_train, epochs = 20, batch_size = 128, validation_data = (X_test, y_test))
 
 if save_model:
     model.save(model_name) 
