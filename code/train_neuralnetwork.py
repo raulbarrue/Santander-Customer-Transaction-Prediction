@@ -13,7 +13,7 @@ plot_results = False
 predict_kaggle = False
 save_model = False
 
-main_question = input("Personalise execution? Y/N"):
+main_question = input("Personalise execution? Y/N")
     if main_question == "Y".lower():
 
     question1 = input("Plot results? Y/N")
