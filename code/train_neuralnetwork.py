@@ -14,7 +14,7 @@ predict_kaggle = False
 save_model = False
 
 main_question = input("Personalise execution? Y/N")
-    if main_question == "Y".lower():
+if main_question == "Y".lower():
 
     question1 = input("Plot results? Y/N")
     if question1 == "Y".lower():
@@ -24,9 +24,9 @@ main_question = input("Personalise execution? Y/N")
     if question2 == "Y".lower():
         predict_kaggle = True
 
-    question3 = input("Save model? Y/N"):
-        if question3 == "Y".lower():
-            save_model = True
+    question3 = input("Save model? Y/N")
+    if question3 == "Y".lower():
+        save_model = True
 
 
 
