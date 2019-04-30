@@ -5,7 +5,6 @@ from keras.layers import Dense
 from sklearn.model_selection import train_test_split
 import matplotlib.pyplot as plt
 
-
 # User outputs
 plot_results = False
 predict_kaggle = False
@@ -64,7 +63,7 @@ model.add(Dense(1, activation = "sigmoid", name = "dense4"))
 model.compile(optimizer = "adam", loss = "binary_crossentropy", metrics = ["accuracy"])
 
 # NN Fit
-history = model.fit(X_train, y_train, epochs = 150, batch_size = 128, validation_data = (X_test, y_test))
+history = model.fit(X_train, y_train, epochs = 150, batch_size = 256, validation_data = (X_test, y_test))
 
 if save_model:
     model.save(model_name) 
@@ -101,6 +100,6 @@ if predict_kaggle:
     test_data = load_df.drop("ID_code", axis = 1)
     predictions = model.predict_classes(test_data)
     kaggle_results = pd.DataFrame(data = predictions, index = load_df["ID_code"], columns = ["target"])
-    kaggle_results.to_csv("results/NN_submission.csv") 
+    kaggle_results.to_csv("results/NN_upsampling_submission.csv") 
 
 
