@@ -6,3 +6,4 @@ Mess.ipynb
 NN_play.h5
 results
 *.h5
+.gitignore
