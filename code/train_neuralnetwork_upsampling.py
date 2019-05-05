@@ -38,9 +38,12 @@ numpy.random.seed(7)
 train_dataset = pd.read_csv("data/train.csv")
 train_dataset = train_dataset.drop("ID_code", axis = 1)
 
+# Split train / test
+train, test = train_test_split(train_dataset, test_size=0.2)
+
 # Separate majority and minority classes
-traindf_majority = train_dataset[train_dataset.target==0]
-traindf_minority = train_dataset[train_dataset.target==1]
+traindf_majority = train[train.target==0]
+traindf_minority = train[train.target==1]
 
 # Upsample minority class
 df_minority_upsampled = resample(traindf_minority, 
@@ -52,12 +55,11 @@ df_minority_upsampled = resample(traindf_minority,
 df_upsampled = pd.concat([traindf_majority, df_minority_upsampled])
 
 
-# Split train / test
-train, test = train_test_split(df_upsampled, test_size=0.2)
+
 
 # Splitting between features and target
-X_train = train.drop("target", axis = 1).values
-y_train = train["target"].values
+X_train = df_upsampled.drop("target", axis = 1).values
+y_train = df_upsampled["target"].values
 
 X_test = test.drop("target", axis = 1).values
 y_test = test["target"].values
@@ -65,7 +67,7 @@ y_test = test["target"].values
 
 
 # Neural Network
-n_cols = len(train.columns) - 1 #removes the target column
+n_cols = len(df_upsampled.columns) - 1 #removes the target column
 model = Sequential()
 
 # NN Structure
