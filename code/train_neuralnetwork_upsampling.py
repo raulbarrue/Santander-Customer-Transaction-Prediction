@@ -29,7 +29,7 @@ if main_question == "Y".lower():
 
 
 
-#### UNBALANCED DATASET ### 
+#### BALANCED DATASET ### 
 
 # Set seed
 numpy.random.seed(7)
