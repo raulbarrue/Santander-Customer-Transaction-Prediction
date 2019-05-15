@@ -71,16 +71,17 @@ n_cols = len(df_upsampled.columns) - 1 #removes the target column
 model = Sequential()
 
 # NN Structure
-model.add(Dense(100, activation = "tanh", input_shape = (n_cols,), name = "dense1"))
-model.add(Dense(100, activation = "tanh", name = "dense2"))
-model.add(Dense(100, activation = "tanh", name = "dense3"))
+model.add(Dense(n_cols, activation  = 'tanh', input_shape = (n_cols,), name = "input_layer"))
+model.add(Dense(300, activation = "tanh", name = "dense1"))
+model.add(Dense(150, activation = "tanh", name = "dense2"))
+model.add(Dense(75, activation = "tanh", name = "dense3"))
 model.add(Dense(1, activation = "sigmoid", name = "dense4"))
 
 # NN Compiler
 model.compile(optimizer = "adam", loss = "binary_crossentropy", metrics = ["accuracy"])
 
 # NN Fit
-history = model.fit(X_train, y_train, epochs = 150, batch_size = 256, validation_data = (X_test, y_test))
+history = model.fit(X_train, y_train, epochs = 50, batch_size = 256, validation_data = (X_test, y_test))
 
 if save_model:
     model.save(model_name) 
