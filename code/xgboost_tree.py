@@ -1,4 +1,4 @@
-import xgboost as xgb
+from xgboost import XGBClassifier
 from sklearn.metrics import mean_squared_error
 from sklearn.model_selection import train_test_split
 from sklearn.utils import resample
@@ -42,7 +42,7 @@ y_test = test["target"].values
 
 #data_dmatrix = xgb.DMatrix(data=X_train,label=y_train)
 
-xg_reg = xgb.XGBRegressor(objective ='reg:linear', colsample_bytree = 0.3, learning_rate = 0.1, max_depth = 5, alpha = 10, n_estimators = 10)
+xg_reg = XGBClassifier(objective ='binary:logistic', colsample_bytree = 0.3, learning_rate = 0.1, max_depth = 5, alpha = 10, n_estimators = 10)
 
 xg_reg.fit(X_train,y_train)
 
@@ -53,3 +53,8 @@ xg_reg.fit(X_train,y_train)
 #print("RMSE: {}".format(rmse))
 
 ## MAKE KAGGLE PREDICTIONS & SAVE RESULTS
+load_df = pd.read_csv("data/test.csv")
+test_data = load_df.drop("ID_code", axis = 1).values
+predictions = xg_reg.predict(test_data)
+kaggle_results = pd.DataFrame(data = predictions, index = load_df["ID_code"], columns = ["target"])
+kaggle_results.to_csv("results/xgboost_tree_submission.csv") 
