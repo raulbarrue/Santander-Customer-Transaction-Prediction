@@ -7,4 +7,4 @@ NN_play.h5
 results
 *.h5
 __pycache__
-/code/__pycache__
+**/code/__pycache__
